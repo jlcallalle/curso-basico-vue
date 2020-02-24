@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expresiones</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ title }}</h1>
+    <p>{{ 1 + 1 + 1 }}</p>
+    <p>{{ true || false }}</p>
+    <p>{{ true ? true : false }}</p>
+    <p>{{ 'string'.toUpperCase() }}</p>
+    <p>{{ JSON.stringify({ name: 'jorge'}) }}</p>
+
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        title: 'Hola Vue! 2020'
+      }
+    })
+  </script>
+</body>
+</html>
