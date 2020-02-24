@@ -40,3 +40,44 @@ Si es algo fijo y no cambiara a lo largo del tiempo usar v-if
 
 v-show, si no cumple condicion renderiza en display:none
 Si el elemento cambia constantemente usar v-show
+
+
+Rendereziado de Listas
+----------------------
+
+Directiva v-for: permite interactuar con listas de arreglos.
+
+La propiedad key permite identificar a cada elemento, si la lista se reordene
+o tenga actualizaciones, se ordene.
+
+Podemos usar los ìndices (p, i), donde p son los valores e i, el indice
+
+En un v-for se puede usar con array y array de objetos
+
+<ul>
+    <li v-for="(p, i) in prices" v-bind:key="p">
+        {{ i }} - {{ p }}
+    </li>
+</ul> 
+
+<ul>
+    <li v-for="(p, i) in priceWithDays" v-bind:key="day">
+        {{ i }} - {{ p.day }} - {{ p.value }}
+    </li>
+</ul>
+
+var app = new Vue({
+      el: '#app',
+      data: {
+        prices: [8400,7900,8200,9000,9400,1000,2000],
+        priceWithDays: [
+            { day: 'lunes', value: 8400 },
+            { day: 'martes', value: 8100 },
+            { day: 'miercoles', value: 8300 },
+            { day: 'jueves', value: 8210 },
+            { day: 'viernes', value: 7400 },
+            { day: 'sábado', value: 9400 },
+            { day: 'domingo', value: 9400 },
+        ],
+      }
+    })
