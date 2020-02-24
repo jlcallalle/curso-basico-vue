@@ -46,3 +46,32 @@ var app = new Vue({
   }
 })
 ```
+
+
+## Contro de Flujo Directivas
+
+Permite renderizar contenido de forma condicional.
+
+``` html
+    <span v-if="changePercent > 0"> 👍 </span>
+    <span v-else-if="changePercent < 0"> 👎</span>
+    <span v-else> 🤞 </span>
+
+    <span v-show="changePercent > 0"> 👍 </span>
+    <span v-show="changePercent < 0"> 👎</span>
+    <span v-show="changePercent === 0"> 🤞</span>
+```
+
+``` js
+var app = new Vue({
+  el: '#app',
+    data: {
+      changePercent:10
+  }
+})
+```
+v-if, si no cumple la condicion, remueve el elemento del DOM, 
+Si es algo fijo y no cambiara a lo largo del tiempo usar v-if
+
+v-show, si no cumple condicion renderiza en display:none
+Si el elemento cambia constantemente usar v-show

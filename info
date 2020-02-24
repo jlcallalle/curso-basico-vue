@@ -1,6 +1,8 @@
 Aprender Vue
 ---------------
+
 Expresiones y Propiedades:
+----------------------------
 Una expresión representa el valor de las propiedades de data,se puede usar código js, sumar números, expresiones boolenas, funciones.
 
 <h1>{{ title }}</h1>
@@ -15,6 +17,26 @@ app.title
 
 
 Atributos Dinamicos
+----------------------
 Permite que los atributos html tengan valores dinámicos:  href, title, alt, src.
 
 <img v-bind:src="img" v-bind:alt="name">
+
+
+Control de flujo
+----------------------------
+Permite renderizar contenido de forma condicional.
+
+<span v-if="changePercent > 0"> 👍 </span>
+<span v-else-if="changePercent < 0"> 👎</span>
+<span v-else> 🤞 </span>
+
+<span v-show="changePercent > 0"> 👍 </span>
+<span v-show="changePercent < 0"> 👎</span>
+<span v-show="changePercent === 0"> 🤞</span>
+
+v-if, si no cumple la condicion, remueve el elemento del DOM, 
+Si es algo fijo y no cambiara a lo largo del tiempo usar v-if
+
+v-show, si no cumple condicion renderiza en display:none
+Si el elemento cambia constantemente usar v-show
