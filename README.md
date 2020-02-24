@@ -108,15 +108,31 @@ var app = new Vue({
       el: '#app',
       data: {
         prices: [8400,7900,8200,9000,9400,1000,2000],
-        priceWithDays: [
-            { day: 'lunes', value: 8400 },
-            { day: 'martes', value: 8100 },
-            { day: 'miercoles', value: 8300 },
-            { day: 'jueves', value: 8210 },
-            { day: 'viernes', value: 7400 },
-            { day: 'sábado', value: 9400 },
-            { day: 'domingo', value: 9400 },
-        ],
+      }
+    })
+```
+
+## Manejo de eventos
+Eventos: click, mouseover
+
+Methods: Objeto de la instancia de vue donde se puede deifnir funciones, que se pueden utilizar en diferetnes contextos, principalmente para atacharse a eventos que puede ser disparados por la vista. 
+
+v-on: directiva que sirve para escuchar eventos del DOM, tales como onclick, onmouseover, mouseout, para ejecutar alguna función.
+
+``` html
+  <span v-on:click="toggleShowPrices"> ver precios {{ showPrices ? '🙉' : '🙈'}} </span>
+```
+
+``` js
+    var app = new Vue({
+      el: '#app',
+      data: {
+        showPrices: false
+      },
+      methods: {
+          toggleShowPrices(){
+              this.showPrices = !this.showPrices
+          }
       }
     })
 ```
