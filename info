@@ -12,3 +12,9 @@ Una expresión representa el valor de las propiedades de data,se puede usar cód
 
 en consola, si deseo inspeccionar la expresion usar:
 app.title
+
+
+Atributos Dinamicos
+Permite que los atributos html tengan valores dinámicos:  href, title, alt, src.
+
+<img v-bind:src="img" v-bind:alt="name">
