@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control de flujo directiva</title>
+  <style>
+    .green {
+        color:green;
+    }
+    .red {
+        color:red;
+    }
+    .orange {
+        color:orange;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <img v-bind:src="img" v-bind:alt="name" width="100"> 
+    <h1 v-bind:class="changePercent > 0 ? 'green' : 'red' ">{{ name }}
+      <span v-on:click="toggleShowPrices">  {{ showPrices ? '🙉' : '🙈'}} </span>
+    </h1>
+    
+    <ul v-show=showPrices>
+        <li class="uppercase"
+            v-bind:class="{ orange: p.value == price, red: p.value < price, green: p.value > price  }"
+            v-for="(p, i) in priceWithDays" 
+            v-bind:key="p.day">
+            {{ i }} - {{ p.day }} - {{ p.value }}
+        </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        name: 'Bitcoin',
+        img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+        changePercent: 2,
+        price: 8400,
+        prices: [8400,7900,8200,9000,9400,1000,2000],
+        priceWithDays: [
+            { day: 'lunes', value: 8400 },
+            { day: 'martes', value: 8100 },
+            { day: 'miercoles', value: 8300 },
+            { day: 'jueves', value: 8210 },
+            { day: 'viernes', value: 7400 },
+            { day: 'sábado', value: 9400 },
+            { day: 'domingo', value: 9400 },
+        ],
+        showPrices: false
+      },
+      methods: {
+          toggleShowPrices(){
+              this.showPrices = !this.showPrices
+          }
+      }
+    })
+  </script>
+</body>
+</html>
