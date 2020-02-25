@@ -141,8 +141,9 @@ v-on: directiva que sirve para escuchar eventos del DOM, tales como onclick, onm
 ## Clases en tiempo real
 
 Con la directiva **v-bind**, se puede cambiar clases en tiempor real, segùn condicion.
-
 Se puede aplicar el atributo class con v-bind a travez de objetos
+
+v-bind usabamos para modificar los atributos de html, link, src, alt, pero en caso de las clases podemos usar una ternari, un string u objeto
 
 
 ``` html
@@ -182,3 +183,35 @@ var app = new Vue({
   }
 })
 ```
+
+## Estilos en tiempo real
+
+De igual forma que usamos  **v-bind** con class, se puede aplicar estilos en el html.
+
+``` html
+ <div id="app" v-bind:style="{ background: '#' + color }">
+   <img v-bind:src="img" v-bind:alt="name" width="100"> 
+    <h1 v-bind:class="changePercent > 0 ? 'green' : 'red' ">{{ name }}
+      <span v-on:click="toggleShowPrices">  {{ showPrices ? '🙉' : '🙈'}} </span>
+    </h1>
+ </div>
+
+```
+
+``` js
+var app = new Vue({
+  el: '#app',
+    data: {
+      name: 'Bitcoin',
+      color: 'f4f4f4'
+    },
+    methods: {
+        toggleShowPrices(){
+            this.showPrices = !this.showPrices
+            this.color = this.color.split('').reverse().join('')
+        }
+    }
+})
+```
+
+Para interactuar con los valores en data, utilizamos this.nombre de variable
