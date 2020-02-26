@@ -215,3 +215,73 @@ var app = new Vue({
 ```
 
 Para interactuar con los valores en data, utilizamos this.nombre de variable
+
+
+## Propiedades Computadas y Watchers
+
+Las Propiedades computadas son aquillas pro que se generean a partir de otras propiedades, permite generar un  valor nuevo. 
+
+La ueva propiedad se modifica, cada vez que se cambia una propiedad de las asignadas.
+
+Propiedades que se calculan en tiempo real en base a los valores de otras propiedades
+
+
+``` html
+  <div id="app">
+    <img v-bind:src="img" v-bind:alt="name" width="100"> 
+    <h1 > {{ title }} </h1>
+    <h2 > {{ reversedMessage }} </h2>
+    <span v-on:click="toggleShowPrices"> {{ showPrices ? '🙉' : '🙈'}} </span>
+  </div>
+```
+
+``` js
+var app = new Vue({
+      el: '#app',
+      data: {
+        name: 'Bitcoin',
+        symbol: 'BTC',
+        img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+        changePercent: 2,
+        color: 'f4f4f4',
+        showPrices: false
+      },
+      computed: {
+          title () {
+              return `${this.name} - ${this.symbol}`
+          },
+          reversedMessage: function () {
+            return this.name.split('').reverse().join('')
+          }
+      },
+      watch: {
+          showPrices (newVal, oldVal) {
+              console.log(newVal, oldVal);
+          }
+      },
+      methods: {
+          toggleShowPrices(){
+              this.showPrices = !this.showPrices
+              this.color = this.color.split('').reverse().join('')
+          }
+      }
+    })
+```
+
+La propiedad title() se cambiara, cada vez que se cambie alguna propiedad de name o symbol
+De igual forma como method, **this** es la manera que utilizamos para acceder a las propiedades de la instancia de vue.
+
+Una propiedad computada, se utiliza como una propiedad normal **{{ title }}**
+
+<br>
+
+
+**Los watchers**, tienen comportamiento similar, en vez de ser funciones que devuelven un valor, son funciones que ejecutan un codigo.
+
+El nombre de la funcion watcher debe ser el mismo de la propiedad data.
+El watcher recibe 2 valores, valor nuevo y valor viejo
+
+
+##  v-model Two way Databinding
+
+Directiva v-model, permite linkear lo que escribe un usario a travez de las prpiedades de data.

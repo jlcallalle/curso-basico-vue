@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control de flujo directiva</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="number" v-model="value">
+    <span> {{ value }}</span>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        name: 'Bitcoin',
+        symbol: 'BTC',
+        img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+        changePercent: 2,
+        value: 0,
+        color: 'f4f4f4',
+        showPrices: false
+      },
+      computed: {
+          title () {
+              return `${this.name} - ${this.symbol}`
+          },
+          reversedMessage: function () {
+            return this.name.split('').reverse().join('')
+          }
+      },
+      watch: {
+          showPrices (newVal, oldVal) {
+              console.log(newVal, oldVal);
+          }
+      },
+      methods: {
+          toggleShowPrices(){
+              this.showPrices = !this.showPrices
+              this.color = this.color.split('').reverse().join('')
+          }
+      }
+    })
+  </script>
+</body>
+</html>
