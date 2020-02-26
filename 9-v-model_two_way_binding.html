@@ -8,6 +8,7 @@
   <div id="app">
     <input type="number" v-model="value">
     <span> {{ value }}</span>
+    <span> {{ converteValue }}</span>
   </div>
   <script>
     var app = new Vue({
@@ -19,11 +20,18 @@
         changePercent: 2,
         value: 0,
         color: 'f4f4f4',
+        price: 8400,
         showPrices: false
       },
       computed: {
           title () {
               return `${this.name} - ${this.symbol}`
+          },
+          converteValue () {
+              if(!this.value){
+                  return 0
+              }
+              return this.value / this.price
           },
           reversedMessage: function () {
             return this.name.split('').reverse().join('')

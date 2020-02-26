@@ -285,3 +285,49 @@ El watcher recibe 2 valores, valor nuevo y valor viejo
 ##  v-model Two way Databinding
 
 Directiva v-model, permite linkear lo que escribe un usario a travez de las prpiedades de data.
+
+``` html
+  <div id="app">
+    <input type="number" v-model="value">
+    <span> {{ value }}</span>
+    <span> {{ converteValue }}</span>
+  </div>
+```
+
+``` js
+  var app = new Vue({
+      el: '#app',
+      data: {
+        name: 'Bitcoin',
+        symbol: 'BTC',
+        img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+        changePercent: 2,
+        value: 0,
+        color: 'f4f4f4',
+        price: 8400,
+        showPrices: false
+      },
+      computed: {
+          title () {
+              return `${this.name} - ${this.symbol}`
+          },
+          converteValue () {
+              if(!this.value){
+                  return 0
+              }
+              return this.value / this.price
+          },
+      },
+      watch: {
+          showPrices (newVal, oldVal) {
+              console.log(newVal, oldVal);
+          }
+      },
+      methods: {
+          toggleShowPrices(){
+              this.showPrices = !this.showPrices
+              this.color = this.color.split('').reverse().join('')
+          }
+      }
+    })
+```
