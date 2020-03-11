@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Componentes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <counter></counter>
+    </div>
+<script>
+
+    Vue.component('counter', {
+        data () {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increment(){
+                this.counter += 1
+            }
+        },
+        template: `
+                <div>
+                    <button v-on:click="increment"> Click me! </button>
+                    <span>  {{ counter }} </span>
+                </div>
+            `,
+    })
+
+    new Vue ({
+        el: '#app',
+        data () {
+            return {
+                title: 'Hola Vue!',
+            }
+        },
+        
+    })
+</script>
+
+</body>
+</html>

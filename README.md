@@ -284,7 +284,6 @@ El watcher recibe 2 valores, valor nuevo y valor viejo
 
 ##  v-model Two way Databinding
 
-<<<<<<< HEAD
 Directiva v-model, permite linkear lo que escribe un usario a travez de las prpiedades de data.
 
 ``` html
@@ -331,7 +330,7 @@ Directiva v-model, permite linkear lo que escribe un usario a travez de las prpi
           }
       }
     })
-=======
+
 Directiva v-model, permite linkear las cosas que puede escribir el usuario en un input con las propiedades definidas en data (two day databinding)
 
 
@@ -361,5 +360,50 @@ var app = new Vue({
         }
     }
   })
->>>>>>> d9b4602b63da2aabfd5e7e1c585e34444b53e2fe
+```
+
+
+##  Crear Componentes Custom
+
+La funcion Vue component permite registrar y crear componentes nuevos,
+se puede disponer de data, method, computer, etc, en vue componente se agrega en comillas el  template html
+
+
+``` html
+ <div id="app">
+      <h1>{{ title }}</h1>
+      <counter></counter>
+  </div>
+```
+
+``` js
+
+    Vue.component('counter', {
+        data () {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increment(){
+                this.counter += 1
+            }
+        },
+        template: `
+                <div>
+                    <button v-on:click="increment"> Click me! </button>
+                    <span>  {{ counter }} </span>
+                </div>
+            `,
+    })
+
+    new Vue ({
+        el: '#app',
+        data () {
+            return {
+                title: 'Hola Vue!',
+            }
+        },
+        
+    })
 ```
