@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expresiones</title>
+  <script src="https://unpkg.com/vue"></script>
+  <style>
+    .red {
+      color: tomato;
+    }
+    .green {
+      color:green;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>
+      Mis Cursos
+    </h1>
+      <p>
+        <input type="text" placeholder="Titulo del curso"  v-model="title"/>
+        {{ title }}
+      </p>
+      <p>
+        <input type="number" placeholder="Horas" v-model="time" />
+        {{ time }}
+      </p>
+      <p>
+        <button v-on:click="addCourse">Guardar Curso</button>
+      </p>
+    </fieldset>
+    <div>
+      <h3>Lista de Cursos</h3>
+      <p v-if="courses.length == 0" class="red">Aun no has realizado cursos</p>
+      <div>
+        <ol>
+          <li v-for="p in courses">
+            {{ p.title }}  {{ p.time }}
+          </li>
+        </ol>
+        <hr/>
+        <p>
+          Llevo <strong>{{ totalTime }}</strong> horas aprendiendo en Platzi.
+          <b>#NuncaParesDeAprender 💚</b>
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        courses: [],
+        title:'',
+        time:''
+      },
+      computed: {
+        totalTime () {
+                let total = 0
+                function sumTime(item) {
+                  total += item.time;
+                  //total = total + item.time
+                }
+                this.courses.forEach(sumTime);
+                
+                return total;
+                },
+      },
+      methods: {
+        addCourse() {
+          console.log('guardar')
+          this.courses.push({ title: this.title, time: this.time});
+          this.title = '';
+          this.time = '';
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -284,6 +284,7 @@ El watcher recibe 2 valores, valor nuevo y valor viejo
 
 ##  v-model Two way Databinding
 
+<<<<<<< HEAD
 Directiva v-model, permite linkear lo que escribe un usario a travez de las prpiedades de data.
 
 ``` html
@@ -330,4 +331,35 @@ Directiva v-model, permite linkear lo que escribe un usario a travez de las prpi
           }
       }
     })
+=======
+Directiva v-model, permite linkear las cosas que puede escribir el usuario en un input con las propiedades definidas en data (two day databinding)
+
+
+``` html
+<div id="app">
+  <input type="number" v-model="value"> <br>
+  <span> data simple: {{ value }}</span> <br>
+  <span> data doble {{ converteValue }}</span>
+</div>
+```
+
+``` js
+var app = new Vue({
+    el: '#app',
+    data: {
+      name: 'Bitcoin',
+      value: 0,
+      price:2
+    },
+    computed: {
+        converteValue() {
+          if(!this.value) {
+            return 0
+          }
+          return this.value * this.price
+
+        }
+    }
+  })
+>>>>>>> d9b4602b63da2aabfd5e7e1c585e34444b53e2fe
 ```
