@@ -366,8 +366,109 @@ var app = new Vue({
 ##  Crear Componentes Custom
 
 La funcion Vue component permite registrar y crear componentes nuevos,
-se puede disponer de data, method, computer, etc, en vue componente se crea los template dentro de un string literal
+se puede disponer de data, method, computer, etc, en vue componente se crea los template dentro de un string literal-
 
+Cuando se crea un vue.component, permite crear el tag con el mimo nombre, o tambien podemos usar la sinxataxis minuscula y con guiones.
+
+El componente padre enviar informacion al componente hijo para que lo utilice
+
+
+``` html
+ <div id="app">
+      <coin-detail 
+          v-bind:img="img"
+          v-bind:name="name"
+          v-bind:price="price"
+          v-bind:title="title"
+          v-bind:changePercent='changePercent' ></coin-detail>
+
+  </div>
+```
+
+``` js
+
+    Vue.component('CoinDetail', {
+        props: ['title','changePercent','img','name','price','priceWithDays'],
+        data () {
+            return {
+                showPrices: false,
+                value: 0,
+            }
+        },
+        methods: {
+            toggleShowPrices() {
+                this.showPrices = !this.showPrices
+            }
+        },
+        computed: {
+                converteValue () {
+                    if(!this.value){  //checkea si el precio tiene un valor, sino retorna 0
+                        return 0
+                    }
+                    return this.value * this.price
+                }
+            },
+        template: `
+                <div>
+                    <img 
+                    v-on:mouseover="toggleShowPrices"   
+                    v-on:mouseout="toggleShowPrices" 
+                    v-bind:src="img" v-bind:alt="name" width="100"
+                    > 
+
+                    <h1 v-bind:class="changePercent > 0 ? 'green' : 'red' ">{{ title }} 
+                        <span v-if="changePercent > 0"> 👍</span>
+                        <span v-else-if="changePercent < 0"> 👎</span>
+                        <span v-else> 🤞 </span>
+                        <span v-on:click="toggleShowPrices"> {{ showPrices ? '🙉' : '🙈'}} </span>
+                    </h1>
+
+                    <input type="number" v-model="value">
+                    <span> {{ converteValue }}</span>
+
+                    <ul>
+                        <li v-for="(p, i) in priceWithDays" v-bind:key="day">
+                            {{ i }} - {{ p.day }} - {{ p.value }}
+                        </li>
+                    </ul> 
+                    {{ priceWithDays }}
+
+                </div>
+            `,
+    })
+    new Vue ({
+        el: '#app',
+        data () {
+            return {
+                title: 'Vue Components ',
+                name: 'Bitcoin ',
+                symbol: 'BTC',
+                img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+                changePercent: -10,
+                value: 0,
+                color: 'f4f4f4',
+                price: 5,
+                priceWithDays: [
+                    { day: 'lunes', value: 8400 },
+                    { day: 'martes', value: 8100 },
+                    { day: 'miercoles', value: 8300 },
+                    { day: 'jueves', value: 8210 },
+                    { day: 'viernes', value: 7400 },
+                    { day: 'sábado', value: 9400 },
+                    { day: 'domingo', value: 9400 },
+                ],
+            }
+        },
+        
+    })
+```
+
+
+
+## Comunicación entre Componentes: propiedades
+La comunicacion de padre hace hijos es atravez de propiedades
+props: se define las propiedades donde el componente padre setee al componente hijo
+el componente hijo, no puede modificar la propiedad padre
 
 ``` html
  <div id="app">
@@ -408,11 +509,65 @@ se puede disponer de data, method, computer, etc, en vue componente se crea los 
     })
 ```
 
-## Comunicación entre Componentes: propiedades
-
-La comunicacion de padre hace hijos es atravez de propiedades
-
 
 ## Comunicación entre Componentes: Eventos
 
-La comunicacion de hijo a padres es atravez de eventos
+La comunicacion de hijo a padres es atravez de eventos.
+v:bind modificar en tiempo real, atributo dinamico
+v-on evento para que el hijo envia data al padre
+
+
+
+## Slots
+Permite que el contenido padre puede usar compoentes del hijo
+
+En el componente hijo se define: 
+
+``` html
+<slot name="texto"></slot>
+<slot name="enlace"></slot>
+```
+
+en el padre se define: 
+
+
+``` html
+<template v-slot:texto>
+    <p>Esto es un texto ipsum dolor sit amet consectetur adipisicing elit. Officiis dicta soluta perspiciatis ab ut, nihil harum molestiae, commodi maxime explicabo inventore placeat possimus repudiandae voluptatem cum numquam necessitatibus excepturi quibusdam!</p>
+</template>
+
+<template v-slot:enlace>
+    <a href="#">Es un Link</a>
+</template>
+
+```
+
+tag template: renderiza contenido sin necesidad de incluir un tag, cuando se usa template se usa direvitva v-slot:text
+
+** Se puede distribuir contenido desde un componente padre a un componente hijo
+
+
+## Ciclo de vida y Hooks
+Para terminar con el sistema de compoenentes se tiene que ver el ciclo de vida de estos componentes
+Hooks son diferentes eventos que podemos representar en nuestro componente a travez de funciones
+
+
+``` js
+  created () {
+      console.log( 'created ...')
+  },
+  mounted() {
+      console.log( 'mounted ...')
+  },
+```
+
+created se recomienda para poder obtener informacion atravez de un api Rest
+Mounted, tengo disponible el DOM, puedo acceder al domn, elemento html que no tengo en el created
+
+## Ciclo de vida y Hooks
+Vue component: crear contenido html y lo agrupa
+El Componente padre puede enviar data al hijo con propiedades
+El hijo envia al padre mediante eventos
+slot, ipermite amppliear la distribución de contenido
+
+Práctica:

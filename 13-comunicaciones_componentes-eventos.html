@@ -11,6 +11,7 @@
 <body>
     <div id="app"  v-bind:style="{ background: '#' + color }">
         <coin-detail 
+            v-on:change-color="updateColor"
             v-bind:img="img"
             v-bind:name="name"
             v-bind:price="price"
@@ -95,6 +96,14 @@
                 ],
             }
         },
+        methods: {
+            updateColor(color){
+                this.color = color || this.color
+                    .split('')
+                    .reverse()
+                    .join('')
+            }
+        }
         
     })
 </script>
