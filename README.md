@@ -404,11 +404,15 @@ se puede disponer de data, method, computer, etc, en vue componente se crea los 
                 title: 'Hola Vue!',
             }
         },
-        
+
     })
 ```
 
+## Comunicación entre Componentes: propiedades
 
-##  Comunicación entre Componentes: propiedades
+La comunicacion de padre hace hijos es atravez de propiedades
 
-Modularizar contenido html y llevarlo a un componente
+
+## Comunicación entre Componentes: Eventos
+
+La comunicacion de hijo a padres es atravez de eventos

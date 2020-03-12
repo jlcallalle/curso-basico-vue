@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div id="app"  v-bind:style="{ background: '#' + color }">
         <coin-detail 
             v-bind:img="img"
             v-bind:name="name"
@@ -21,7 +21,7 @@
 <script>
 
     Vue.component('CoinDetail', {
-        props: ['title','changePercent','img','name','price'],
+        props: ['title','changePercent','img','name','price','priceWithDays'],
         data () {
             return {
                 showPrices: false,
@@ -31,6 +31,7 @@
         methods: {
             toggleShowPrices() {
                 this.showPrices = !this.showPrices
+                this.$emit('change-color') //evento de hijo a padre
             }
         },
         computed: {
@@ -60,13 +61,12 @@
                     <span> {{ converteValue }}</span>
 
                     <ul v-show=showPrices>
-                        <li class="uppercase"
-                            v-bind:class="{ orange: p.value == price, red: p.value < price, green: p.value > price  }"
-                            v-for="(p, i) in priceWithDays" 
-                            v-bind:key="p.day">
-                            {{ i }} - {{ p.day }} - {{ p.value }}
-                        </li>
-                    </ul>
+                            <li class="uppercase"
+                                v-for="(p, i) in priceWithDays" 
+                                v-bind:key="p.day">
+                                {{ i }} - {{ p.day }} - {{ p.value }}
+                            </li>
+                        </ul>
 
                 </div>
             `,
@@ -83,7 +83,16 @@
                 changePercent: -10,
                 value: 0,
                 color: 'f4f4f4',
-                price: 5
+                price: 5,
+                priceWithDays: [
+                    { day: 'lunes', value: 8400 },
+                    { day: 'martes', value: 8100 },
+                    { day: 'miercoles', value: 8300 },
+                    { day: 'jueves', value: 8210 },
+                    { day: 'viernes', value: 7400 },
+                    { day: 'sábado', value: 9400 },
+                    { day: 'domingo', value: 9400 },
+                ],
             }
         },
         
