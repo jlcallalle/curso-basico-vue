@@ -571,3 +571,46 @@ El hijo envia al padre mediante eventos
 slot, ipermite amppliear la distribución de contenido
 
 Práctica:
+
+
+## CLI - Ambiente de desarrollo
+
+Identificar:
+node --version : v10.15.2
+npm --version: 6.13.4
+
+https://github.com/vuejs/vetur
+https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+https://prettier.io/
+https://github.com/vuejs/vue-devtools
+
+Instalar CLI:
+npm install -g @vue/cli   //Instala de forma globa, @ significa que pertenece a la organizacion
+vue --version
+vue create platzi-exchange  | vue create --help
+
+
+
+``` js
+//Instala de forma global, @ significa que pertenece a la organizacion
+npm install -g @vue/cli   
+vue --version
+vue create --help
+vue create platzi-exchange
+
+```
+
+Option:
+manual
+ - babel
+ - Linter / formater
+ESLINT 
+ - Pretier
+Lint to save
+
+
+``` js
+ cd platzi-exchange
+ $ npm run serve
+```
+
