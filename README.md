@@ -366,7 +366,7 @@ var app = new Vue({
 ##  Crear Componentes Custom
 
 La funcion Vue component permite registrar y crear componentes nuevos,
-se puede disponer de data, method, computer, etc, en vue componente se agrega en comillas el  template html
+se puede disponer de data, method, computer, etc, en vue componente se crea los template dentro de un string literal
 
 
 ``` html
@@ -407,3 +407,8 @@ se puede disponer de data, method, computer, etc, en vue componente se agrega en
         
     })
 ```
+
+
+##  Comunicación entre Componentes: propiedades
+
+Modularizar contenido html y llevarlo a un componente

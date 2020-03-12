@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Componentes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <coin-detail 
+            v-bind:img="img"
+            v-bind:name="name"
+            v-bind:price="price"
+            v-bind:title="title"
+            v-bind:changePercent='changePercent' ></coin-detail>
+
+    </div>
+<script>
+
+    Vue.component('CoinDetail', {
+        props: ['title','changePercent','img','name','price'],
+        data () {
+            return {
+                showPrices: false,
+                value: 0,
+            }
+        },
+        methods: {
+            toggleShowPrices() {
+                this.showPrices = !this.showPrices
+            }
+        },
+        computed: {
+                converteValue () {
+                    if(!this.value){  //checkea si el precio tiene un valor, sino retorna 0
+                        return 0
+                    }
+                    return this.value * this.price
+                }
+            },
+        template: `
+                <div>
+                    <img 
+                    v-on:mouseover="toggleShowPrices"   
+                    v-on:mouseout="toggleShowPrices" 
+                    v-bind:src="img" v-bind:alt="name" width="100"
+                    > 
+
+                    <h1 v-bind:class="changePercent > 0 ? 'green' : 'red' ">{{ title }} 
+                        <span v-if="changePercent > 0"> 👍</span>
+                        <span v-else-if="changePercent < 0"> 👎</span>
+                        <span v-else> 🤞 </span>
+                        <span v-on:click="toggleShowPrices"> {{ showPrices ? '🙉' : '🙈'}} </span>
+                    </h1>
+
+                    <input type="number" v-model="value">
+                    <span> {{ converteValue }}</span>
+
+                    <ul v-show=showPrices>
+                        <li class="uppercase"
+                            v-bind:class="{ orange: p.value == price, red: p.value < price, green: p.value > price  }"
+                            v-for="(p, i) in priceWithDays" 
+                            v-bind:key="p.day">
+                            {{ i }} - {{ p.day }} - {{ p.value }}
+                        </li>
+                    </ul>
+
+                </div>
+            `,
+    })
+
+    new Vue ({
+        el: '#app',
+        data () {
+            return {
+                title: 'Vue Components ',
+                name: 'Bitcoin ',
+                symbol: 'BTC',
+                img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+                changePercent: -10,
+                value: 0,
+                color: 'f4f4f4',
+                price: 5
+            }
+        },
+        
+    })
+</script>
+
+</body>
+</html>
