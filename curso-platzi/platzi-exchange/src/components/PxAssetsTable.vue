@@ -29,18 +29,26 @@
           />
         </td>
         <td>
-           <b>#{{ a.rank }}</b>
+           <b>{{ a.rank }}</b>
         </td>
         <td>
-           <b>#{{ a.name }}</b>
+           <b>{{ a.name }}</b>
         </td>
         <td>
-           <b>#{{ a.priceUsd }}</b>
+           <b>{{ a.priceUsd | dollar}}</b>
         </td>
         <td>
-           <b>#{{ a.marketCapUsd }}</b>
+           <b>{{ a.marketCapUsd | dollar }}</b>
         </td>
-        <td><b>#{{ a.changePercent24Hr }}</b></td>
+        <td
+          :class="
+            a.changePercent24Hr.includes('-')
+              ? 'text-red-600'
+              : 'text-green-600'
+          "
+        >
+          {{ a.changePercent24Hr | percent }}
+        </td>
       </tr>
     </tbody>
   </table>
