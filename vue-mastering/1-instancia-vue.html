@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instancia de Vue</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+    
+    <div class="nav-bar"></div>
+
+    <div id="app">
+        <div class="product">
+       
+            <div class="product-image">
+                <img src="assets/vmSocks-green.jpg" alt="">
+            </div>
+
+            <div class="product-info">
+                <h1>{{ product }}</h1>  
+            </div>
+        
+        </div>
+    </div>
+
+     <!-- 
+     https://unpkg.com/vue
+     https://unpkg.com/vue@2.6.11/dist/vue.js
+     -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        var app = new Vue({ 
+            el: '#app',
+            data: {
+                product: 'Medias', 
+            }
+        })
+        Vue.config.devtools = true
+   </script>
+
+</body>
+</html>
+
+<!--
+
+La instancia de Vue
+---------------------
+A lo largo de este curso, aprenderá los fundamentos de Vue mientras construimos esta página de producto juntos.
+
+var app = new Vue ({options})
+Una instancia de Vue es la raíz de nuestra aplicación. Se crea pasandole un objeto,que tiene varias propiedades y opciones, tiene la capacidad de almacenar datos y realizar acciones
+
+La instancia de Vue se conecta a un elemento de su elección, formando una relación entre la instancia y esa parte del DOM : el: '#app'
+
+Poner nuestros datos/variables en su lugar.
+Una instancia de Vue tiene un lugar para los datos, en su propiedad de datos.
+
+ data: {
+        product: 'Medias'
+    }
+
+Usando una expresión
+<h1>Nombre de producto: {{ product }} </h1> 
+
+Las expresiones nos permiten utilizar valores de datos existentes, junto con la lógica, para producir nuevos valores de datos.
+
+Algunas otras formas en que se pueden usar las expresiones:
+
+<p> {{ product + ' ?' }} </p>
+<p>{{ firstName + ' ' + lastName }}</p>
+<p>{{ clicked ? true : false }}</p>
+<p>{{ message.split('').reverse().join('') }}</p>
+
+Introduciendo reactividad
+La razón por la cual Vue puede mostrar el valor del producto de inmediato es porque Vue es reactivo. En otras palabras, los datos de la instancia están vinculados a cada lugar al que se hace referencia. Por lo tanto, Vue no solo puede hacer que sus datos aparezcan dentro del HTML que lo hace referencia, sino que ese HTML se actualizará para mostrar nuevos valores cada vez que los datos de referencia cambien.
+
+Para demostrarlo, abramos la consola y cambiemos el valor de nuestra cadena de productos. Mira lo que pasa.
+
+is reactive, se actualiza en dom, se actualiza cuando la data 
+
+    // app.$el
+    // app.product
+    // app.product = 'Caminsa'
+
+Reto: https://codepen.io/VueMastery/pen/qxwZBQ
+-->

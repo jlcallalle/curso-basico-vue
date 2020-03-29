@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event handling</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+    <div class="nav-bar"></div>
+
+    <div id="app">
+        <div class="product">
+            <div class="product-image">
+                <img v-bind:src="image">
+            </div>
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p v-if="inStock">En stock</p>
+                <p v-else> Agotado </p>
+
+                <p v-if="inventory > 10"> En stock</p>
+                <p v-else-if="inventory <=10 && inventory > 0">Casi agotado </p>
+                <p v-else> Agotado</p>
+                
+                <ul>
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ul>
+
+                <div v-for="variant in variants" :key="variant.variantId">
+                    <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+                </div>
+
+                <!-- <button v-on:click="cart +=1">Add to Cart</button> -->
+                <button v-on:click="addToCart">Add to Cart</button>
+                <button @click="removeFromCart">Remove from cart</button>
+
+
+               
+                <div class="cart">
+                    <p>Cart({{cart}})</p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        var app = new Vue({  //vue instance, propiedad el, esta relacionado al contenido
+            el: '#app',
+            data: {
+                product: 'Medias', 
+                image: './assets/vmSocks-green.jpg',
+                inStock: false,
+                inventory: 8,
+                details: ["80% cotton", "20% polyester", "Gender-neutral"],
+                variants: [
+                    {
+                        variantId: 2234,
+                        variantColor: "green",
+                        variantImage: './assets/vmSocks-green.jpg'
+                    },
+                    {
+                        variantId: 2235,
+                        variantColor: "blue",
+                        variantImage: './assets/vmSocks-blue.jpg'
+                    }
+                ],
+                cart: 0
+            },
+            methods: {
+                addToCart() {
+                    this.cart += 1
+                },
+                updateProduct(variantImage) {
+                    this.image = variantImage
+                },
+                removeFromCart() {
+                    this.cart -=1
+                }
+            }
+        })
+
+        Vue.config.devtools = true
+
+   </script>
+
+</body>
+</html>
+
+<!--
+Event Handling
+---------------
+En esta lección aprenderemos cómo escuchar eventos DOM que podemos usar para activar métodos.
+
+La directiva v-on 
+--------------------
+- Se usa para permitir que los elementos escuchen eventos
+  The shorthand for v-on is @
+- La directiva v-on puede activar un método
+- this, se refiere a los datos de la instancia de Vue actual, así como a otros métodos     declarados dentro de la instancia
+
+v-on:click="addToCart", llama a una funcionq ue se ubica en el method
+v-on = @mouseover
+
+En Method, se agregan funciones en ES6 Syntax
+
+updateProduct(variantImage) {
+    this.image = variantImage
+}, 
+
+Antes ES5
+updateProduct: function (variantImage) {
+    this.image = variantImage
+}
+
+Podemos especificar el tipo de evento a escuchar:
+- click
+- mouseover
+- cualquier dom event
+
+Adicionalmente al evento click o mousevent, hay otros por ejemplo
+
+<button v-on:click="addToCart">Add to Cart</button>
+<p @mouseover="updateProduct"> Color </p>
+<form @submit="addToCart">..</form>
+<input @keyup.enter="send">
+
+Modifier: en pdf hay lista, .
+- enter
+
+Reto: https://codepen.io/GreggPollack/pen/wNVGyJ
+https://codepen.io/GreggPollack/pen/QYeNQq
+-->

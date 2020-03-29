@@ -585,7 +585,7 @@ https://prettier.io/
 https://github.com/vuejs/vue-devtools
 
 Instalar CLI:
-npm install -g @vue/cli   //Instala de forma globa, @ significa que pertenece a la organizacion
+npm install -g @vue/cli   //Instala de forma global, @ significa que pertenece a la organizacion
 vue --version
 vue create platzi-exchange  | vue create --help
 
@@ -596,6 +596,8 @@ vue create platzi-exchange  | vue create --help
 npm install -g @vue/cli   
 vue --version
 vue create --help
+
+//Creacion de proyecto
 vue create platzi-exchange
 
 ```
@@ -604,9 +606,8 @@ Option:
 manual
  - babel
  - Linter / formater
-ESLINT 
- - Pretier
-Lint to save
+- ESLINTs Pretier
+- Lint to save
 
 
 ``` js
@@ -614,3 +615,36 @@ Lint to save
  $ npm run serve
 ```
 
+## CLI - Estructura 
+
+src
+ main.js:  realiza el import de vue
+import Vue from "vue" de npm
+
+App.vue
+  se ve la part tempalte, script y style
+  export default es parte de los modulos de ecmascript
+
+
+
+``` js
+npm run lint //permite formatear codigo 
+npm run build  //ambiente producción, genera carpeta dist
+
+npm i -g serve //permite generar un servidor local
+serve -s dist  //correr servidor web local de la carpeta list
+vue ui // genera app local amigable para gestionar proyectos
+```
+
+
+## CLI - Agregar Framework Tailwind css 
+
+Permite agregar plugin al proyecto: vue add
+
+``` js
+ vue add @ianaya89/tailwind
+```
+
+en main.js, importamos css
+
+import '@/assets/css/tailwind.css'

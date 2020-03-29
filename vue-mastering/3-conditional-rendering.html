@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Conditional Rendering</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+    <div class="nav-bar"></div>
+    <div id="app">
+        <div class="product">
+            <div class="product-image">
+                <img v-bind:src="image">
+            </div>
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p v-if="inStock">En stock</p>
+                <p v-else> Agotado </p>
+
+                <p v-if="inventory > 10"> En stock</p>
+                <p v-else-if="inventory <=10 && inventory > 0">Casi agotado </p>
+                <p v-else> Agotado</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        var app = new Vue({ 
+            el: '#app',
+            data: {
+                product: 'Medias', 
+                image: './assets/vmSocks-green.jpg',
+                inStock: true,
+                inventory: 9,
+            }
+        })
+
+        Vue.config.devtools = true
+   </script>
+
+</body>
+</html>
+
+<!--
+Conditional Rendering
+En esta lección descubriremos cómo mostrar elementos condicionalmente con Vue.
+Queremos mostrar texto que diga si nuestro producto está en stock o no, según nuestros datos.
+
+v-show: si la aplicacion necesita un elemento togge, se recomienda v-show, este oculta mediante css, display:none 
+
+v-if : elimina del dom
+v-else-if
+v-else
+
+reto: https://codepen.io/GreggPollack/pen/omKxoK
+resolf: https://codepen.io/GreggPollack/pen/vboGpO
+-->
