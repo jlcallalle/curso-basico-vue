@@ -667,3 +667,83 @@ export default {
 ```
 
 Se puede poner componentes dentro de otros componentes
+
+## CLI - VUE-ROUTERS
+
+1.- se instala en dependencies
+
+``` js
+npm i -S vue-router
+```
+
+2.- se crea routers.js 
+
+``` js
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '@/views/Home'
+
+Vue.use(Router)
+
+export default new Router({
+    mode: 'history', l
+  
+    routes: [
+      {
+        path: '/',
+        name: 'home',
+        component: Home
+      }
+    ]
+  })
+  
+```
+
+
+3.- se crea componente Home:
+
+``` html
+<template>
+  <div>
+    <px-assets-table />
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'Home',
+}
+</script>
+```
+
+4.- en app.vue
+la etiqueta router-view  es la que realiza la funcionalidad de router en componentes
+
+``` html
+<template>
+  <div id="app">
+     <router-view class="container" />
+  </div>
+</template>
+```
+
+5.- en main.js, se importa router.vue
+
+``` js
+
+import router from '@/router'  //añadir
+
+new Vue({
+  router, //añadir
+  render: h => h(App)
+}).$mount('#app')
+
+```
+
+Adicional, router, nos permite linkear para saber a donde tiene que llevar
+
+``` html
+<router-link to="/">Volver a la pagina de Inicio</router-link>
+
+```
