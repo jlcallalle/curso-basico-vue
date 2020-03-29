@@ -747,3 +747,84 @@ Adicional, router, nos permite linkear para saber a donde tiene que llevar
 <router-link to="/">Volver a la pagina de Inicio</router-link>
 
 ```
+
+
+## CLI - FECTH API REST DE COINCAP
+
+Crearmo api.js, consumimos servicios de:
+
+https://docs.coincap.io/?version=latest#ee0c0be6-513f-4466-bbb0-2016add462e9
+
+``` js
+const url = 'https://api.coincap.io/v2'
+
+function getAssets() {
+  return fetch(`${url}/assets?limit=20`)
+    .then(res => res.json())
+    .then(res => res.data)
+}
+
+export default {
+  getAssets,
+}
+
+```
+
+En home.vue, importamos api, asignamos getAssets en la función created
+para obtener data
+
+``` html
+<template>
+  <div>
+    <px-assets-table :obtenerData="obtenerData" />
+  </div>
+</template>
+
+<script>
+import api from '@/api'
+import PxAssetsTable from '@/components/PxAssetsTable.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    PxAssetsTable
+  },
+   data() {
+    return {
+      obtenerData: []
+    }
+  },
+  created() {
+    api
+      .getAssets()
+      .then(datos => (this.obtenerData = datos))
+  }
+}
+</script>
+
+
+```
+En Componente de tabla, se agrega propiedades para consumir data 
+
+``` html
+ <tbody>
+       <tr
+        v-for="a in obtenerData"
+        :key="a.id"
+      >
+        <td>
+           <b>#{{ a.rank }}</b>
+        </td>
+<script>
+export default {
+  name: 'PxAssetsTable',
+  props: {
+    obtenerData: {
+      type: Array,
+      default: () => []
+    }
+  }
+}
+</script>
+
+```

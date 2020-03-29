@@ -8,9 +8,7 @@
         <div
           class="hidden sm:block w-full block flex-grow lg:flex lg:items-center lg:w-auto"
         >
-          <div class="text-sm lg:flex-grow">
-  
-          </div>
+          <div class="text-sm lg:flex-grow"></div>
         </div>
       </nav>
     </nav>
