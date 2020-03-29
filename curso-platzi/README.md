@@ -604,8 +604,8 @@ vue create platzi-exchange
 
 Option:
 manual
- - babel
- - Linter / formater
+- babel
+- Linter / formater
 - ESLINTs Pretier
 - Lint to save
 
@@ -617,16 +617,12 @@ manual
 
 ## CLI - Estructura 
 
-src
- main.js:  realiza el import de vue
-import Vue from "vue" de npm
-
-App.vue
-  se ve la part tempalte, script y style
-  export default es parte de los modulos de ecmascript
+- src main.js:  muestra import Vue from 'vue' (node modules) 
+- App.vue
+  se estructura el html/template, el scrip y styles, en script elexport default es parte de los modulos de ecmascript
 
 
-
+Formas de ejecutar vue-cli:
 ``` js
 npm run lint //permite formatear codigo 
 npm run build  //ambiente producción, genera carpeta dist
@@ -648,3 +644,26 @@ Permite agregar plugin al proyecto: vue add
 en main.js, importamos css
 
 import '@/assets/css/tailwind.css'
+
+
+## CLI - COMPONENTES
+Se agregará un componente Header
+- Se crea en src/componentes/PxHeader.vue e importa en app.vue, luego se escribe el tag html con el nombre del componente
+
+
+
+```html
+ <PxHeader />
+```
+``` js
+import PxHeader from '@/components/PxHeader.vue'
+
+export default {
+  name: 'App',
+  components: {
+    PxHeader
+  }
+}
+```
+
+Se puede poner componentes dentro de otros componentes
