@@ -1060,3 +1060,48 @@ cambiamos el array por la propiedad computada
   >
 <td>
 ```
+
+## Mejorar proyecto: links y conversión
+
+En PxHeader.vue agregaremos links para ir a las secciones
+
+``` html
+  <router-link
+    v-for="l in links"
+    :key="l.title"
+    :to="l.to"
+    >{{ l.title }}</router-link>
+``` 
+
+Seteamos los links
+
+``` js
+  data() {
+    return {
+      links: [
+        {
+          title: 'BTC',
+          to: { name: 'coin-detail', params: { id: 'bitcoin' } }
+        },
+        {
+          title: 'ETH',
+          to: { name: 'coin-detail', params: { id: 'ethereum' } }
+        },
+        {
+          title: 'XRP',
+          to: { name: 'coin-detail', params: { id: 'ripple' } }
+        }
+      ]
+    }
+  }
+  ``` 
+
+En coindetail: Agregamos whatcher para que en el detalle, se pueda usar los links
+
+``` js
+   watch: {
+    $route() {
+      this.getCoin()
+    }
+  },
+  ``` 

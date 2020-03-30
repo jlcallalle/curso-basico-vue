@@ -21,9 +21,6 @@
             v-model="filter"
           />
         </td>
-        {{ filter }}
-
-        {{ !this.filter }}
       </tr>
     </thead>
     <tbody>
