@@ -40,3 +40,35 @@ https://api.coincap.io/v2/assets/bitcoin/history?interval=d1
     },
   ]
 }
+
+
+// api.coincap.io/v2/exchanges
+
+
+
+{
+  "data": [
+    {
+      "id": "okex",
+      "name": "Okex",
+      "rank": "1",
+      "percentTotalVolume": "21.379485735166293542000000000000000000",
+      "volumeUsd": "616465445.1646260280799955",
+      "tradingPairs": "22",
+      "socket": false,
+      "exchangeUrl": "https://www.okex.com/",
+      "updated": 1536343139514
+    },
+    {
+      "id": "bithumb",
+      "name": "Bithumb",
+      "rank": "2",
+      "percentTotalVolume": "15.172929246645476514000000000000000000",
+      "volumeUsd": "437502880.0201364436175560",
+      "tradingPairs": "42",
+      "socket": false,
+      "exchangeUrl": "https://www.bithumb.com/",
+      "updated": 1536343090523
+    },
+  ]
+}

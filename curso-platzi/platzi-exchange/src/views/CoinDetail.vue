@@ -97,8 +97,16 @@
           <td>{{ m.priceUsd | dollar }}</td>
           <td>{{ m.baseSymbol }} / {{ m.quoteSymbol }}</td>
           <td>
-         
-           
+            <px-button
+              :is-loading="m.isLoading || false"
+              v-if="!m.url"
+              @custom-click="getWebSite(m)"
+            >
+              <slot>Obtener Link</slot>
+            </px-button>
+            <a v-else class="hover:underline text-green-600" target="_blanck">{{
+              m.url
+            }}</a>
           </td>
         </tr>
       </table>
@@ -107,12 +115,13 @@
 </template>
 
 <script>
+import PxButton from '@/components/PxButton'
 import api from '@/api'
 
 export default {
   name: 'CoinDetail',
 
-  components: {  },
+  components: { PxButton },
 
   data() {
     return {
@@ -173,6 +182,7 @@ export default {
     },
 
     getWebSite(exchange) {
+      console.log(exchange.exchangeId,'exchange')
       this.$set(exchange, 'isLoading', true)
 
       return api

@@ -981,3 +981,28 @@ En Home.vue
 ``` html
  <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
 ``` 
+
+## Problemas de Reactividad
+
+
+``` js
+function getMarkets(coin) {
+  return fetch(`${url}/assets/${coin}/markets?limit=5`)
+    .then(res => res.json())
+    .then(res => res.data)
+}
+
+function getExchange(id) {
+  return fetch(`${url}/exchanges/${id}`)
+    .then(res => res.json())
+    .then(res => res.data)
+}
+``` 
+
+
+$set, solo en objetos y arrays, para agregar objetos cuaando no estan desde el pricipio
+recibe 1er argumento el objeto al que queremos agregar la propiedad 
+
+``` js
+this.$set(exchange, 'url', res.exchangeUrl) 
+``` 
