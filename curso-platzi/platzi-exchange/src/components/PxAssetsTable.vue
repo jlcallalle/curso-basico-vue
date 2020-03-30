@@ -31,8 +31,13 @@
         <td>
            <b>{{ a.rank }}</b>
         </td>
-        <td>
-           <b>{{ a.name }}</b>
+       <td>
+          <router-link
+            class="hover:underline text-green-600"
+            :to="{ name: 'coin-detail', params: { id: a.id } }"
+            >{{ a.name }}</router-link
+          >
+          <small class="ml-1 text-gray-500">{{ a.symbol }}</small>
         </td>
         <td>
            <b>{{ a.priceUsd | dollar}}</b>
@@ -49,22 +54,35 @@
         >
           {{ a.changePercent24Hr | percent }}
         </td>
+        <td class="hidden sm:block">
+          <px-button @custom-click="goToCoin(a.id)">
+            <span>Detalle</span>
+          </px-button>
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+import PxButton from '@/components/PxButton'
+
 export default {
   name: 'PxAssetsTable',
+  components: { PxButton },
 
   props: {
-    // se neecsita una propiedad 'assets' que le permite al componente pardre enviar la lista de assets
     obtenerData: {
       type: Array,
       default: () => []
     }
+  },
+  methods: {
+    goToCoin(id) {
+      this.$router.push({ name: 'coin-detail', params: { id } })
+    }
   }
+  
 }
 </script>
 

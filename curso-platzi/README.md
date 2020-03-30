@@ -828,3 +828,132 @@ export default {
 </script>
 
 ```
+
+## CLI - FILTER
+
+plugin numeral permite formatear números
+
+``` js
+ npm i -S numeral
+
+```
+
+Creamos filters.js
+
+``` js
+import numeral from 'numeral'
+
+const dollarFilter = function(value) {
+  if (!value) {
+    return '$ 0'
+  }
+
+  return numeral(value).format('($ 0.00a)')
+}
+
+```
+
+En main.js, importamos el archivo filters
+
+
+``` js
+import { dollarFilter, percentFilter } from '@/filters'
+
+Vue.filter('dollar', dollarFilter)
+Vue.filter('percent', percentFilter)
+```
+
+En componente table (PxAssetssTable.vue)
+``` js
+  <td>
+    <b>{{ a.changePercent24Hr | percent }}</b>
+  </td>
+```
+
+aplicar classes dinámicas con v-bind:class="a.changePercent24Hr" include ('-') true false
+
+``` html
+<td :class="
+    a.changePercent24Hr.includes('-')
+      ? 'text-red-600'
+      : 'text-green-600'
+  "
+>
+  {{ a.changePercent24Hr | percent }}
+</td>
+```
+
+
+
+## RUTAS DINAMICAS 
+
+Indicamos con router-link linkear de forma dinamicas las páginas según parametros.
+
+``` html
+<td>
+  <router-link
+    :to="{ name: 'coin-detail', params: { id: a.id } }"
+    >{{ a.name }}</router-link
+  >
+</td>
+```
+
+De forma programatica
+Crear componente PxButton.vue
+
+
+``` html
+<template>
+  <button
+    @click="buttonClick"
+  >
+    <p>
+      <slot></slot>
+    </p>
+  </button>
+</template>
+
+<script>
+export default {
+  name: 'PxButton',
+
+  props: {
+    isLoading: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  methods: {
+    buttonClick() {
+      this.$emit('custom-click')
+    }
+  }
+}
+</script>
+```
+
+En componente table
+
+
+``` html
+  <td class="hidden sm:block">
+    <px-button @custom-click="goToCoin(a.id)">
+      <span>Detalle</span>
+    </px-button>
+  </td>
+
+  <script>
+import PxButton from '@/components/PxButton'
+
+export default {
+  name: 'PxAssetsTable',
+  components: { PxButton },
+  methods: {
+    goToCoin(id) {
+      this.$router.push({ name: 'coin-detail', params: { id } })
+    }
+  }
+}
+</script>
+```
