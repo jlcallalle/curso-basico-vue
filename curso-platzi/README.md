@@ -1000,9 +1000,63 @@ function getExchange(id) {
 ``` 
 
 
+## Problemas de Reactividad
+
+
 $set, solo en objetos y arrays, para agregar objetos cuaando no estan desde el pricipio
 recibe 1er argumento el objeto al que queremos agregar la propiedad 
 
 ``` js
 this.$set(exchange, 'url', res.exchangeUrl) 
 ``` 
+
+## Filter y sort con vue
+Para filtrar data, realizamos una propiedad computada
+indicamos si symbol o name incluye el texto filter v:bind
+
+
+Para mostrar de mayor a menor, usamos la funcion sort.
+como parametros, filtro actual y el modificado.
+``` html
+ <input
+      id="filter"
+      placeholder="Buscar..."
+      type="text"
+      v-model="filter"
+    />
+``` 
+
+
+``` js
+  computed: {
+    filteredAssets(){
+
+       const altOrder = this.sortOrder === 1 ? -1 : 1
+
+      return this.obtenerData
+        .filter(
+          a =>
+            a.symbol.toLowerCase().includes(this.filter.toLowerCase()) ||
+            a.name.toLowerCase().includes(this.filter.toLowerCase())
+        )
+        .sort((a, b) => {
+          if (parseInt(a.rank) > parseInt(b.rank)) {
+            return this.sortOrder // 1
+          }
+
+          return altOrder
+        })
+
+    }
+  },
+```
+
+cambiamos el array por la propiedad computada
+
+``` html
+ <tr
+    v-for="a in filteredAssets"
+    :key="a.id"
+  >
+<td>
+```
