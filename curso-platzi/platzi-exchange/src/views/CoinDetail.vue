@@ -1,5 +1,8 @@
 <template>
   <div class="flex-col">
+     <div class="flex justify-center">
+      <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
+    </div>
 
     <template v-if="!isLoading">
       <div class="flex flex-col sm:flex-row justify-around items-center">
@@ -71,6 +74,15 @@
           >
         </div>
       </div>
+
+      <line-chart
+        class="my-10"
+        :colors="['orange']"
+        :min="min"
+        :max="max"
+        :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
+      />
+      
 
       <h3 class="text-xl my-10">Mejores Ofertas de Cambio</h3>
       <table>

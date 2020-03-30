@@ -957,3 +957,27 @@ export default {
 }
 </script>
 ```
+
+## Utilizar componentes de terceros
+Se utilizará vue-spinners para loader de espera y vuechart para gráfico
+
+``` js
+npm i -S @saeris/vue-spinners vue-chartkick
+npm i -S chart.js
+```
+
+En main.js, importamos los componentes de terceros, usamos Vue.use
+
+``` js
+import Chart from 'chart.js'
+import Chartick from 'vue-chartkick'
+import { VueSpinners } from '@saeris/vue-spinners'
+
+Vue.use(VueSpinners)
+Vue.use(Chartick.use(Chart))
+``` 
+
+En Home.vue 
+``` html
+ <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
+``` 
