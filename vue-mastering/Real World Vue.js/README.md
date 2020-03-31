@@ -41,6 +41,7 @@ Componentes Visual Studio Code:
      vdata: estructura de data
      vprops:
      vimport
+     vbase: estructura
 - Theme: 
      FlatUI dark
 
@@ -111,3 +112,25 @@ Por ello refactorizamos solo a : username
 </div>
 
 ```
+
+
+## 6.- Componentes
+- tempalte es el esqueleto
+- script es la logica
+- estilos
+
+Desde vue-ui
+dependencias: instalar: sass-loader
+
+npm install -D sass-loader sass
+npm i node-sass
+
+npm install --save-dev sass-loader node-sass
+
+
+
+npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.12
+npm WARN sass-loader@8.0.2 requires a peer of node-sass@^4.0.0 but none was installed.
+npm WARN sass-loader@8.0.2 requires a peer of fibers@>= 3.1.0 but none was installed.
+
