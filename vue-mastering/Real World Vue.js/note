@@ -40,7 +40,18 @@ preguntar: que es chunk-vendors.js?
 
 alias: "/about",
 
+
 5 Dynamic routing & History Mode
+$route.params.username: representa el estado actual del router
+
+ {
+    path: "/user/:username",
+    name: "user",
+    component: User,
+    props: true   // $route.params, es conjunto de props componentes
+  },
+
+
 6 Single File Vue Components
 7 Global Components
 8 Slots
