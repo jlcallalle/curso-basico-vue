@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>Events Listing</h1>
-    <EventCard/>
+    <EventCard />
+    <BaseIcon />
   </div>
 </template>
 
@@ -11,10 +12,8 @@ import EventCard from '@/components/EventCard.vue'
 export default {
   components: {
     EventCard
-  },
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

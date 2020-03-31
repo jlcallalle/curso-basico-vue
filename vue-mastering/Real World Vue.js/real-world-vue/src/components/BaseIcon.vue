@@ -1,9 +1,11 @@
 <template>
-  <h1>Create Event</h1>
+  <div>
+    Icon Nuevo
+  </div>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style></style>
+<style scoped></style>

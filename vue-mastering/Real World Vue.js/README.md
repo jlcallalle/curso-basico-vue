@@ -122,15 +122,25 @@ Por ello refactorizamos solo a : username
 Desde vue-ui
 dependencias: instalar: sass-loader
 
+``` js
 npm install -D sass-loader sass
 npm i node-sass
 
 npm install --save-dev sass-loader node-sass
+```
+Definiendo estilos;
+
+``` html
+<style scoped>
+scope, el css solo aplica para este componente, si no es scope representa de forma global
+``` 
 
 
+### Global Components
+Si deseamos usar componentes en diferentes secciones de la web
+tendrioamos que importar y setear en export el compoenente.
+Pero hay componentes base que podemos setearlos:
 
-npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
-npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.12
-npm WARN sass-loader@8.0.2 requires a peer of node-sass@^4.0.0 but none was installed.
-npm WARN sass-loader@8.0.2 requires a peer of fibers@>= 3.1.0 but none was installed.
-
+Base Componentes
+BaseIcon.vue
+BaseButton.vue
