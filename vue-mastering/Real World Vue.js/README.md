@@ -139,8 +139,24 @@ scope, el css solo aplica para este componente, si no es scope representa de for
 ### Global Components
 Si deseamos usar componentes en diferentes secciones de la web
 tendrioamos que importar y setear en export el compoenente.
-Pero hay componentes base que podemos setearlos:
 
-Base Componentes
-BaseIcon.vue
-BaseButton.vue
+Seria muy tedioso, para ello se puede setear Componentes base:
+
+- BaseIcon.vue
+- BaseButton.vue
+- BaseInput.vue
+
+
+Lo importamos en el main.js
+
+``` js
+import BaseIcon from '@/components/BaseIcon.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import BaseInput from '@/components/BaseInput.vue'
+
+Vue.component('BaseIcon', BaseIcon)
+Vue.component('BaseButton', BaseButton)
+Vue.component('BaseInput', BaseInput)
+```
+
+Hay una opción mucho mejor y automático.
