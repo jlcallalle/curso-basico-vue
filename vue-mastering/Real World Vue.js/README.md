@@ -243,7 +243,8 @@ Para usarlo en EventCard.vue, agregamos con el nombre id del sector svg
 ```
 
 
-### API calls with Axios
+## API calls with Axios
+
 - Get started with Axios
 - Make API Calls
 - Component LifeCycle, When to make API calls,
@@ -259,7 +260,7 @@ Axios to do:
 - Properly serialize and deserialize request & responses
 
 
-GET REQUEST
+GET REQUEST EXAMPLE
 
 ``` js
 axios.get('/user?ID=12345')   // Call out to this URL
@@ -274,30 +275,67 @@ axios.get('/user?ID=12345')   // Call out to this URL
   });
 ```
 
-Asíncrono se refiere a la ejecución de procesos ejecutandose de manera simultanea.
-Síncrono se refiere a la ejecución de un solo proceso de manera simultanea.
-Code dosesn't wait to be completed, abefore continuing 
+Apis can be build with framework like: Express, larael, raisl, django
+Apis can be uilt using service like: Firebase, Parse, Graphcoll
 
-Use Mock an API Server 
 
-Apis can be build with framework like:
-Express, larael, raisl, django
+Usaremos  Mock como API Server 
 
-Apis can be uilt using service like:
-Firebase, Parse, Graphcoll
-
-Install server local: npm install -g json-server
-
+``` js
+npm install -g json-server
+``` 
 Muestra: http://localhost:3000/events
 
 
-vue ui
+Instalamos AXIOS
+``` js
 $ npm install axios
+``` 
+``` js
+npm outdated // verifica si los paquetes estan actualizados
+npm update @vue/cli-plugin-babel  // ejemplo de actualizar algún paquete
+npm update // actualiza todos los componentes
+```
+
+En EventList.vue
 
 
+``` js
+import axios from 'axios'
 
-npm outdated, list outdate packages
-npm update @vue/cli-plugin-babel 
-or para todos
+export default {
+  data() {
+    return {
+      events: []
+    }
+  },
+   created() {
+      axios
+        .get('http://localhost:3000/events') 
+        .then(response => {
+          console.log(response.data,'load data')
+          this.events = response.data // <--- set the events data
+        })
+        .catch(error => {
+          console.log('There was an error:', error.response)
+        })
+    }
+}
+```
+Realizarmos un for, 
 
-npm update
+``` html
+<EventCard v-for="event in events" :key="event.id" :event="event"/>
+``` 
+
+La propiedad :event="event", referencia el prop creado en EventCard.
+
+Creamdp un props event de tipo Object
+
+``` js
+export default {
+  props: {
+    event: Object
+  }
+}
+```
