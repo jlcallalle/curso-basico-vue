@@ -160,3 +160,144 @@ Vue.component('BaseInput', BaseInput)
 ```
 
 Hay una opción mucho mejor y automático.
+
+En main.js, reemplazamos:
+
+``` js
+import Vue from 'vue'
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
+
+const requireComponent = require.context(
+  // The relative path of the components folder
+  './components',
+  // Whether or not to look in subfolders
+  false,
+  // The regular expression used to match base component filenames
+  /Base[A-Z]\w+\.(vue|js)$/
+)
+
+requireComponent.keys().forEach(fileName => {
+  // Get component config
+  const componentConfig = requireComponent(fileName)
+
+  // Get PascalCase name of component
+  const componentName = upperFirst(
+    camelCase(
+      // Gets the file name regardless of folder depth
+      fileName
+        .split('/')
+        .pop()
+        .replace(/\.\w+$/, '')
+    )
+  )
+
+
+  // Register component globally
+  Vue.component(
+    componentName,
+    // Look for the component options on `.default`, which will
+    // exist if the component was exported with `export default`,
+    // otherwise fall back to module's root.
+    componentConfig.default || componentConfig
+  )
+})
+``` 
+
+Instalamos lodash 
+``` js
+npm i lodash
+```
+
+Usamos archivo SVG: feather-sprite.svg en public
+
+``` html
+En BaseIcon.vue
+<div class="icon-wrapper">
+    <svg class="icon" :width="width" :height="height">
+      <use v-bind="{'xlink:href':'/feather-sprite.svg#' + name}"></use>
+    </svg>
+</div>
+```
+``` js
+export default {
+  name: 'Icon',
+  props: {
+    name: String,
+    width: {
+      type: [Number, String],
+      default: 24
+    },
+    height: {
+      type: [Number, String],
+      default: 24
+    }
+  }
+}
+```
+
+Para usarlo en EventCard.vue, agregamos con el nombre id del sector svg
+
+``` html
+ <BaseIcon name="users"/>
+```
+
+
+### API calls with Axios
+- Get started with Axios
+- Make API Calls
+- Component LifeCycle, When to make API calls,
+- Creating Services (encampsulate our api en el servicio)
+
+Axios to do:
+- GET, POST, PUT, Delete requests
+- Add authentication to each request
+- Set timeouts if request take too long
+- Configurate defaults for everry request
+- Intercept request to create middleware
+- Handle error and cancel request properly
+- Properly serialize and deserialize request & responses
+
+
+GET REQUEST
+
+``` js
+axios.get('/user?ID=12345')   // Call out to this URL
+  .then(function (response) { 
+    console.log(response);   // When the response returns,log it to the console
+  })
+  .catch(function (error) {
+    console.log(error);   // log ani error
+  })
+  .then(function () {
+    // always executed
+  });
+```
+
+Asíncrono se refiere a la ejecución de procesos ejecutandose de manera simultanea.
+Síncrono se refiere a la ejecución de un solo proceso de manera simultanea.
+Code dosesn't wait to be completed, abefore continuing 
+
+Use Mock an API Server 
+
+Apis can be build with framework like:
+Express, larael, raisl, django
+
+Apis can be uilt using service like:
+Firebase, Parse, Graphcoll
+
+Install server local: npm install -g json-server
+
+Muestra: http://localhost:3000/events
+
+
+vue ui
+$ npm install axios
+
+
+
+npm outdated, list outdate packages
+npm update @vue/cli-plugin-babel 
+or para todos
+
+npm update
