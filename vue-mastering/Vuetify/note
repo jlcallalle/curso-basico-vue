@@ -1,0 +1,8 @@
+
+Vuetify
+---------
+vue create vuetify-dashboard
+    preset  default
+
+VSC Complement:
+- Install Vetur 
